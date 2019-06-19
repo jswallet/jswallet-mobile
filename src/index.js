@@ -8,7 +8,7 @@ export default class MyriadJS extends Component {
       visible: false,
     }
   }
-  
+
   render() {
     return (
       <HomeStack />

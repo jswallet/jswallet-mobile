@@ -96,6 +96,10 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    sourceSets {
+      main { assets.srcDirs = ['src/main/assets', '../../html'] }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

@@ -8,6 +8,7 @@ import Toast from "react-native-simple-toast";
 import PropTypes from "prop-types";
 import { WebView } from "react-native-webview";
 import AsyncStorage from "@react-native-community/async-storage";
+import { SafeAreaView } from 'react-native';
 
 class Home extends Component {
   constructor(props): void {
@@ -102,16 +103,21 @@ class Home extends Component {
 
   onShouldStartLoadWithRequest = (request) => {
     const { url } = request;
+
+    if(url.indexOf('file://') === 0) {
+      return true;
+    }
+
     this.goExternalUrl(url);
     return false;
   }
 
   getIndexFile = () => {
     if (Platform.OS === "android") {
-      return "file:///android_asset/jswallet.github.io/index.html";
+      return { uri: "file:///android_asset/Web.bundle/index.html" };
     }
 
-    return "index.html";
+    return { uri: "Web.bundle/index.html" };
   }
 
   onError = () => {
@@ -121,23 +127,29 @@ class Home extends Component {
   render() {
     const { isLoading } = this.state;
 
-    console.log('render')
-
     if (isLoading) {
       return <Loading />;
     } else {
       return (
-        <WebView
-          style={styles.container}
-          ref={this.getRef}
-          injectedJavaScript={this.getInjection()}
-          source={{ uri: this.getIndexFile() }}
-          onMessage={this.onMessage}
-          onError={this.onError}
-          scrollEnabled={false}
-          javaScriptEnabled
-          onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest}
-        />
+        <>
+        <SafeAreaView style={{ flex: 0, backgroundColor: '#05343e' }} />
+        <SafeAreaView style={{flex: 1, backgroundColor: '#252525'}}>
+          <WebView
+            style={styles.container}
+            ref={this.getRef}
+            injectedJavaScript={this.getInjection()}
+            source={this.getIndexFile()}
+            onMessage={this.onMessage}
+            onError={this.onError}
+            scrollEnabled={false}
+            javaScriptEnabled
+            originWhitelist={['*']}
+            allowFileAccess
+            useWebKit
+            onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest}
+          />
+        </SafeAreaView>
+        </>
       );
     }
   };

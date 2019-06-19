@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { WebView, StatusBar } from "react-native";
+import { StatusBar, SafeAreaView } from "react-native";
 import styles from "./styles";
 import Loading from "../../components/Loading";
 import PropTypes from "prop-types";
+import { WebView } from "react-native-webview";
 
 class ExternalUrl extends Component {
   constructor(props): void {
@@ -15,7 +16,10 @@ class ExternalUrl extends Component {
 
   render = function() {
     if (this.state.uri) {
-      return <WebView source={{ uri: this.state.uri }} scrollEnabled={true} />;
+      return (
+        <SafeAreaView style={{flex: 1, backgroundColor: '#212121'}}>
+          <WebView source={{ uri: this.state.uri }} scrollEnabled={true} />
+        </SafeAreaView>)
     } else {
       return <Loading />;
     }
