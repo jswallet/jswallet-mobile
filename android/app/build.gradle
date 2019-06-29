@@ -109,8 +109,8 @@ android {
         applicationId "com.myralicious.wlc.myriadjs"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 100
+        versionName "1.2"
         missingDimensionStrategy 'react-native-camera', 'general'
     }
     signingConfigs {
