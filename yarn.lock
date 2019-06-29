@@ -4980,10 +4980,9 @@ react-native-tab-view@^1.2.0, react-native-tab-view@^1.4.1:
   dependencies:
     prop-types "^15.6.1"
 
-react-native-torch@^1.1.5:
+"react-native-torch@https://github.com/ludo/react-native-torch.git":
   version "1.1.5"
-  resolved "https://registry.yarnpkg.com/react-native-torch/-/react-native-torch-1.1.5.tgz#165a8b22b66c2b55e188d38604318712282ca0cf"
-  integrity sha512-o6L/HBb9MhDF59ite09RSDmdZSlgrM8ARPPV236Insg8Tt6Qw+sqnojDdXbPYbg0ZjmPZ9KMe6JAlCq+v/dAvg==
+  resolved "https://github.com/ludo/react-native-torch.git#cc167632fc95db5b7096cf59a0d209215a5e12e4"
 
 react-native-webview@^5.12.0:
   version "5.12.0"
