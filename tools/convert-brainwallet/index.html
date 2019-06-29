@@ -1,0 +1,57 @@
+<html data-ember-extension="1">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Convert JSWallet brainwallet to browser URL</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="bitcoinjs.min.js"></script>
+
+    <script type="text/javascript">
+      window.onload = function() {
+        var elBrainwallet = document.getElementById("brainwallet");
+        var elBrowserlink = document.getElementById("browserlink");
+        var elButton = document.getElementById("button");
+
+        elButton.onclick = function() {
+          var rushCode = elBrainwallet.value;
+          var hash = "";
+
+          if (rushCode.indexOf("!") > 0) {
+            var urlArr = rushCode.split("!");
+            var userPassHash = urlArr[1];
+            var passHash = Bitcoin.Crypto.SHA256(
+              urlArr[0] + "!" + userPassHash
+            );
+            hash = urlArr[0] + "!" + passHash.substring(0, 10);
+          } else {
+            hash = rushCode;
+          }
+
+          if (hash) {
+            var link = "https://jswallet.github.io/#" + hash;
+            elBrowserlink.innerHTML = link;
+            elBrowserlink.href = link;
+          } else {
+            alert("Could not convert the brainwallet");
+          }
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <h3>Convert JSWallet brainwallet to browser url</h3>
+
+    <p>
+      <label>Enter your saved brainwallet: </label>
+      <input type="text" id="brainwallet" />
+    </p>
+
+    <p><input type="button" value="Convert to browser URL" id="button" /></p>
+
+    <p><a id="browserlink" target="_blank"></a></p>
+  </body>
+</html>
